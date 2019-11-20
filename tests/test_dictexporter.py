@@ -19,7 +19,7 @@ def test_dict_exporter():
     s1ca = AnyNode(id="sub1Ca", parent=s1c)
 
     exporter = DictExporter()
-    eq_(exporter.export(root),
+    assert exporter.export(root) ==
         {'id': 'root', 'children': [
             {'id': 'sub0', 'children': [
                 {'id': 'sub0B'},
@@ -33,7 +33,6 @@ def test_dict_exporter():
                 ]}
             ]}
         ]}
-        )
 
 
 def test_dict_exporter_node():
@@ -49,7 +48,7 @@ def test_dict_exporter_node():
     s1ca = Node("sub1Ca", parent=s1c)
 
     exporter = DictExporter()
-    eq_(exporter.export(root),
+    assert exporter.export(root) ==
         {'name': 'root', 'children': [
             {'name': 'sub0', 'children': [
                 {'name': 'sub0B'},
@@ -63,7 +62,6 @@ def test_dict_exporter_node():
                 ]}
             ]}
         ]}
-        )
 
 
 def test_dict_exporter_filter():
@@ -79,7 +77,7 @@ def test_dict_exporter_filter():
     s1ca = Node("sub1Ca", parent=s1c)
 
     exporter = DictExporter(attriter=lambda attrs: [(k, v) for k, v in attrs if k == "name"])
-    eq_(exporter.export(root),
+    assert exporter.export(root) ==
         {'name': 'root', 'children': [
             {'name': 'sub0', 'children': [
                 {'name': 'sub0B'},
@@ -93,7 +91,6 @@ def test_dict_exporter_filter():
                 ]}
             ]}
         ]}
-        )
 
 
 def test_dict_exporter_mixin():
@@ -116,7 +113,7 @@ def test_dict_exporter_mixin():
     s1ca = MyClass('s1ca', parent=s1c)
 
     exporter = DictExporter()
-    eq_(exporter.export(root),
+    assert exporter.export(root) ==
         {'foo': 'root', 'children': [
             {'foo': 's0', 'children': [
                 {'foo': 's0b'},
@@ -131,4 +128,3 @@ def test_dict_exporter_mixin():
                     ]}
                 ]}
         ]}
-        )

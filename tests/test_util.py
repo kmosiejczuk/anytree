@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from nose.tools import eq_
+import pytest
 
 from anytree.util import commonancestors, leftsibling, rightsibling
 from anytree import Node
@@ -14,11 +14,11 @@ def test_commonancestors():
     jet = Node("Jet", parent=dan)
     joe = Node("Joe", parent=dan)
 
-    eq_(commonancestors(jet, joe), (udo, dan))
-    eq_(commonancestors(jet, marc), (udo,))
-    eq_(commonancestors(jet), (udo, dan))
-    eq_(commonancestors(), ())
-    eq_(commonancestors(jet, lian), (udo, ))
+    assert commonancestors(jet, joe) == (udo, dan)
+    assert commonancestors(jet, marc) == (udo,)
+    assert commonancestors(jet) == (udo, dan)
+    assert commonancestors() == ()
+    assert commonancestors(jet, lian) == (udo, )
 
 
 def test_leftsibling():
@@ -27,10 +27,10 @@ def test_leftsibling():
     jet = Node("Jet", parent=dan)
     jan = Node("Jan", parent=dan)
     joe = Node("Joe", parent=dan)
-    eq_(leftsibling(dan), None)
-    eq_(leftsibling(jet), None)
-    eq_(leftsibling(jan), jet)
-    eq_(leftsibling(joe), jan)
+    assert leftsibling(dan) == None
+    assert leftsibling(jet) == None
+    assert leftsibling(jan) == jet
+    assert leftsibling(joe) == jan
 
 
 def test_rightsibling():
@@ -39,7 +39,7 @@ def test_rightsibling():
     jet = Node("Jet", parent=dan)
     jan = Node("Jan", parent=dan)
     joe = Node("Joe", parent=dan)
-    eq_(rightsibling(dan), None)
-    eq_(rightsibling(jet), jan)
-    eq_(rightsibling(jan), joe)
-    eq_(rightsibling(joe), None)
+    assert rightsibling(dan) == None
+    assert rightsibling(jet) == jan
+    assert rightsibling(jan) == joe
+    assert rightsibling(joe) == None

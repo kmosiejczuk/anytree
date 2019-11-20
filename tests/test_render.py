@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import six
 
-from nose.tools import eq_
+import pytest
 
 import anytree
 
@@ -48,7 +48,7 @@ def test_render_repr():
     else:
         expected = ("RenderTree(Node('/root'), style=ContStyle(), "
                     "childiter=<class 'list'>)")
-    eq_(repr(r), expected)
+    assert repr(r) == expected
 
 
 def test_render():
@@ -68,7 +68,7 @@ def test_render():
         (u'║   ╚══ ', s0a),
         (u'╚══ ', s1),
     ]
-    eq_(result, expected)
+    assert result == expected
 
     def multi(root):
         for pre, fill, node in anytree.RenderTree(root):
@@ -88,35 +88,35 @@ def test_render():
         (u'│       b', s0a),
         (u'└── Z', s1),
     ]
-    eq_(result, expected)
+    assert result == expected
 
 
 def test_asciistyle():
     style = anytree.AsciiStyle()
-    eq_(style.vertical, u'|   ')
-    eq_(style.cont, '|-- ')
-    eq_(style.end, u'+-- ')
+    assert style.vertical == u'|   '
+    assert style.cont == '|-- '
+    assert style.end == u'+-- '
 
 
 def test_contstyle():
     style = anytree.ContStyle()
-    eq_(style.vertical, u'\u2502   ')
-    eq_(style.cont, u'\u251c\u2500\u2500 ')
-    eq_(style.end, u'\u2514\u2500\u2500 ')
+    assert style.vertical == u'\u2502   '
+    assert style.cont == u'\u251c\u2500\u2500 '
+    assert style.end == u'\u2514\u2500\u2500 '
 
 
 def test_controundstyle():
     style = anytree.ContRoundStyle()
-    eq_(style.vertical, u'\u2502   ')
-    eq_(style.cont, u'\u251c\u2500\u2500 ')
-    eq_(style.end, u'\u2570\u2500\u2500 ')
+    assert style.vertical == u'\u2502   '
+    assert style.cont == u'\u251c\u2500\u2500 '
+    assert style.end == u'\u2570\u2500\u2500 '
 
 
 def test_doublestyle():
     style = anytree.DoubleStyle()
-    eq_(style.vertical, u'\u2551   ')
-    eq_(style.cont, u'\u2560\u2550\u2550 ')
-    eq_(style.end, u'\u255a\u2550\u2550 ')
+    assert style.vertical == u'\u2551   '
+    assert style.cont == u'\u2560\u2550\u2550 '
+    assert style.end == u'\u255a\u2550\u2550 '
 
 
 def test_by_attr():
@@ -126,9 +126,9 @@ def test_by_attr():
     anytree.Node("sub0B", parent=s0, lines=["sub", "0B"])
     anytree.Node("sub0A", parent=s0)
     anytree.Node("sub1", parent=root, lines=["sub1"])
-    eq_(anytree.RenderTree(root).by_attr(),
-        u"root\n├── sub0\n│   ├── sub0B\n│   └── sub0A\n└── sub1")
-    eq_(anytree.RenderTree(root).by_attr("lines"),
-        u"root\n├── su\n│   b0\n│   ├── sub\n│   │   0B\n│   └── \n└── sub1")
-    eq_(anytree.RenderTree(root).by_attr(lambda node: ":".join(node.name)),
-        u"r:o:o:t\n├── s:u:b:0\n│   ├── s:u:b:0:B\n│   └── s:u:b:0:A\n└── s:u:b:1")
+    assert anytree.RenderTree(root).by_attr() ==
+        u"root\n├── sub0\n│   ├── sub0B\n│   └── sub0A\n└── sub1"
+    assert anytree.RenderTree(root).by_attr("lines") ==
+        u"root\n├── su\n│   b0\n│   ├── sub\n│   │   0B\n│   └── \n└── sub1"
+    assert anytree.RenderTree(root).by_attr(lambda node: ":".join(node.name)) ==
+        u"r:o:o:t\n├── s:u:b:0\n│   ├── s:u:b:0:B\n│   └── s:u:b:0:A\n└── s:u:b:1"

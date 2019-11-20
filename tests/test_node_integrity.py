@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from helper import assert_raises
-from nose.tools import eq_
+import pytest
 
 from anytree import LoopError
 from anytree import Node
@@ -41,24 +41,24 @@ def test_readonly_pre():
     ReadonlyNode._is_readonly = True
 
     def check():
-        eq_(root.parent, None)
-        eq_(root.children, tuple([s0, s1]))
-        eq_(s0.parent, root)
-        eq_(s0.children, tuple([s0b, s0a]))
-        eq_(s0b.parent, s0)
-        eq_(s0b.children, tuple())
-        eq_(s0a.parent, s0)
-        eq_(s0a.children, tuple())
-        eq_(s1.parent, root)
-        eq_(s1.children, tuple([s1a, s1b, s1c]))
-        eq_(s1a.parent, s1)
-        eq_(s1a.children, tuple())
-        eq_(s1b.parent, s1)
-        eq_(s1b.children, tuple())
-        eq_(s1c.parent, s1)
-        eq_(s1c.children, tuple([s1ca]))
-        eq_(s1ca.parent, s1c)
-        eq_(s1ca.children, tuple())
+        assert root.parent == None
+        assert root.children == tuple([s0, s1])
+        assert s0.parent == root
+        assert s0.children == tuple([s0b, s0a])
+        assert s0b.parent == s0
+        assert s0b.children == tuple()
+        assert s0a.parent == s0
+        assert s0a.children == tuple()
+        assert s1.parent == root
+        assert s1.children == tuple([s1a, s1b, s1c])
+        assert s1a.parent == s1
+        assert s1a.children == tuple()
+        assert s1b.parent == s1
+        assert s1b.children == tuple()
+        assert s1c.parent == s1
+        assert s1c.children == tuple([s1ca])
+        assert s1ca.parent == s1c
+        assert s1ca.children == tuple()
 
     check()
     with assert_raises(ReadonlyError, ""):

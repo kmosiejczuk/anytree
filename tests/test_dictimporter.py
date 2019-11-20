@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
-from nose.tools import eq_
+import pytest
 
 from anytree import Node
 from anytree import RenderTree
@@ -29,8 +29,8 @@ def test_dict_importer():
         ]}
     data = deepcopy(refdata)
     root = importer.import_(data)
-    eq_(data, refdata)
-    eq_(exporter.export(root), data)
+    assert data == refdata
+    assert exporter.export(root) == data
     r = RenderTree(root)
     expected = u"\n".join([
         u"AnyNode(id='root')",
@@ -66,8 +66,8 @@ def test_dict_importer_node():
         ]}
     data = deepcopy(refdata)
     root = importer.import_(data)
-    eq_(data, refdata)
-    eq_(exporter.export(root), data)
+    assert data == refdata
+    assert exporter.export(root) == data
     r = RenderTree(root)
     expected = u"\n".join([
         u"Node('/root')",

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from nose.tools import eq_
+import pytest
 
 from anytree import Node
 from anytree import RenderTree
@@ -16,10 +16,11 @@ def test_stackoverflow():
     Node("Jan", parent=dan)
     joe = Node("Joe", parent=dan)
 
-    eq_(str(udo), "Node('/Udo')")
-    eq_(str(joe), "Node('/Udo/Dan/Joe')")
+    assert str(udo) == "Node('/Udo')"
+    assert str(joe) == "Node('/Udo/Dan/Joe')"
 
-    eq_(["%s%s" % (pre, node.name) for pre, fill, node in RenderTree(udo)], [
+    assert ["%s%s" % (pre, node.name) for pre, fill, node in RenderTree(udo)] ==
+    [
         u"Udo",
         u"├── Marc",
         u"│   └── Lian",
@@ -27,6 +28,6 @@ def test_stackoverflow():
         u"    ├── Jet",
         u"    ├── Jan",
         u"    └── Joe",
-    ])
-    eq_(str(dan.children),
-        "(Node('/Udo/Dan/Jet'), Node('/Udo/Dan/Jan'), Node('/Udo/Dan/Joe'))")
+    ]
+    assert str(dan.children) ==
+        "(Node('/Udo/Dan/Jet'), Node('/Udo/Dan/Jan'), Node('/Udo/Dan/Joe'))"

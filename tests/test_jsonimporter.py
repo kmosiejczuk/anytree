@@ -1,6 +1,6 @@
 from tempfile import NamedTemporaryFile
 
-from nose.tools import eq_
+import pytest
 
 from anytree.importer import JsonImporter
 from anytree.exporter import DictExporter
@@ -61,9 +61,9 @@ def test_json_importer():
     ]
 
     imported = DictExporter().export(JsonImporter().import_("\n".join(lines)))
-    eq_(refdata, imported)
+    assert refdata == imported
     with NamedTemporaryFile(mode="w+") as ref:
         ref.write("\n".join(lines))
         ref.seek(0)
         imported = DictExporter().export(JsonImporter().read(ref))
-    eq_(refdata, imported)
+    assert refdata == imported

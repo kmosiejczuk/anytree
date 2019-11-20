@@ -1,4 +1,4 @@
-from nose.tools import eq_
+import pytest
 
 from anytree import Node
 from anytree import WalkError
@@ -19,12 +19,12 @@ def test_walker():
     i = Node("i", parent=g)
     h = Node("h", parent=i)
     w = Walker()
-    eq_(w.walk(f, f), ((), f, ()))
-    eq_(w.walk(f, b), ((), f, (b,)))
-    eq_(w.walk(b, f), ((b,), f, ()))
-    eq_(w.walk(a, f), ((a, b), f, ()))
-    eq_(w.walk(h, e), ((h, i, g), f, (b, d, e)))
-    eq_(w.walk(d, e), ((), d, (e,)))
+    assert w.walk(f, f) == ((), f, ())
+    assert w.walk(f, b) == ((), f, (b,))
+    assert w.walk(b, f) == ((b,), f, ())
+    assert w.walk(a, f) == ((a, b), f, ())
+    assert w.walk(h, e) == ((h, i, g), f, (b, d, e))
+    assert w.walk(d, e) == ((), d, (e,))
 
     with assert_raises(WalkError, "Node('/a') and Node('/b') are not part of the same tree."):
         w.walk(Node("a"), Node("b"))

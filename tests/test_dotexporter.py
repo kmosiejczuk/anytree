@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from filecmp import cmp
-from nose.tools import eq_
+import pytest
 from nose.tools import with_setup
 from os import makedirs
 from os.path import dirname
@@ -116,8 +116,8 @@ def test_tree_png():
 def test_esc():
     """Test proper escape of quotes."""
     n = Node(r'6"-6\"')
-    eq_(tuple(DotExporter(n)), (
+    assert tuple(DotExporter(n)) == (
         r'digraph tree {',
         r'    "6\"-6\\\"";',
         r'}'
-    ))
+    )

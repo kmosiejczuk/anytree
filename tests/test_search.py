@@ -1,4 +1,4 @@
-from nose.tools import eq_
+import pytest
 
 from anytree import AsciiStyle
 from anytree import Node
@@ -19,8 +19,8 @@ def test_findall():
     c = Node("c", parent=d)
     e = Node("e", parent=d)
 
-    eq_(findall(f, filter_=lambda node: node.name in ("a", "b")), (b, a))
-    eq_(findall(f, filter_=lambda node: d in node.path), (d, c, e))
+    assert findall(f, filter_=lambda node: node.name in ("a", "b")) == (b, a)
+    assert findall(f, filter_=lambda node: d in node.path) == (d, c, e)
     with assert_raises(CountError, (
             "Expecting at least 4 elements, but found 3. "
             "(Node('/f/b/d'), Node('/f/b/d/c'), Node('/f/b/d/e'))")):
@@ -38,7 +38,7 @@ def test_findall_by_attr():
     Node("c", parent=d)
     Node("e", parent=d)
 
-    eq_(findall_by_attr(f, "d"), (d,))
+    assert findall_by_attr(f, "d") == (d,)
     with assert_raises(CountError, (
             "Expecting at least 1 elements, but found 0.")):
         findall_by_attr(f, "z", mincount=1)
@@ -54,8 +54,8 @@ def test_find():
     i = Node("i", parent=g)
     Node("h", parent=i)
 
-    eq_(find(f, lambda n: n.name == "d"), d)
-    eq_(find(f, lambda n: n.name == "z"), None)
+    assert find(f, lambda n: n.name == "d") == d
+    assert find(f, lambda n: n.name == "z") == None
     with assert_raises(CountError, (
         "Expecting 1 elements at maximum, but found 5. "
         "(Node('/f/b'), Node('/f/b/a'), Node('/f/b/d'), Node('/f/b/d/c'), Node('/f/b/d/e'))")):
@@ -72,6 +72,6 @@ def test_find_by_attr():
     i = Node("i", parent=g)
     Node("h", parent=i)
 
-    eq_(find_by_attr(f, "d"), d)
-    eq_(find_by_attr(f, name="foo", value=4), c)
-    eq_(find_by_attr(f, name="foo", value=8), None)
+    assert find_by_attr(f, "d") == d
+    assert find_by_attr(f, name="foo", value=4) == c
+    assert find_by_attr(f, name="foo", value=8) == None

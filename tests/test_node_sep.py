@@ -3,7 +3,7 @@
 
 import six
 
-from nose.tools import eq_
+import pytest
 
 import anytree as at
 
@@ -32,9 +32,9 @@ def test_render():
         u"└── MyNode('|root|sub1')",
     ])
     if six.PY2:
-        eq_(str(r).decode('utf-8'), expected)
+        assert str(r).decode('utf-8') == expected
     else:
-        eq_(str(r), expected)
+        assert str(r) == expected
 
 
 def test_get():
@@ -45,16 +45,16 @@ def test_get():
     sub0sub1 = MyNode("sub0sub1", parent=sub0)
     sub1 = MyNode("sub1", parent=top)
     r = at.Resolver('name')
-    eq_(r.get(top, "sub0|sub0sub0"), sub0sub0)
-    eq_(r.get(sub1, ".."), top)
-    eq_(r.get(sub1, "..|sub0|sub0sub1"), sub0sub1)
-    eq_(r.get(sub1, "."), sub1)
-    eq_(r.get(sub1, ""), sub1)
+    assert r.get(top, "sub0|sub0sub0") == sub0sub0
+    assert r.get(sub1, "..") == top
+    assert r.get(sub1, "..|sub0|sub0sub1") == sub0sub1
+    assert r.get(sub1, ".") == sub1
+    assert r.get(sub1, "") == sub1
     with assert_raises(at.ChildResolverError,
                        "MyNode('|top') has no child sub2. Children are: 'sub0', 'sub1'."):
         r.get(top, "sub2")
-    eq_(r.get(sub0sub0, "|top"), top)
-    eq_(r.get(sub0sub0, "|top|sub0"), sub0)
+    assert r.get(sub0sub0, "|top") == top
+    assert r.get(sub0sub0, "|top|sub0") == sub0
     with assert_raises(at.ResolverError, "root node missing. root is '|top'."):
         r.get(sub0sub0, "|")
     with assert_raises(at.ResolverError, "unknown root node '|bar'. root is '|top'."):
@@ -72,12 +72,12 @@ def test_glob():
     sub1 = MyNode("sub1", parent=top)
     sub1sub0 = MyNode("sub0", parent=sub1)
     r = at.Resolver()
-    eq_(r.glob(top, "*|*|sub0"), [sub0sub1sub0])
+    assert r.glob(top, "*|*|sub0") == [sub0sub1sub0]
 
-    eq_(r.glob(top, "sub0|sub?"), [sub0sub0, sub0sub1])
-    eq_(r.glob(sub1, "..|.|*"), [sub0, sub1])
-    eq_(r.glob(top, "*|*"), [sub0sub0, sub0sub1, sub1sub0])
-    eq_(r.glob(top, "*|sub0"), [sub0sub0, sub1sub0])
+    assert r.glob(top, "sub0|sub?") == [sub0sub0, sub0sub1]
+    assert r.glob(sub1, "..|.|*") == [sub0, sub1]
+    assert r.glob(top, "*|*") == [sub0sub0, sub0sub1, sub1sub0]
+    assert r.glob(top, "*|sub0") == [sub0sub0, sub1sub0]
     with assert_raises(at.ChildResolverError,
                        "MyNode('|top|sub1') has no child sub1. Children are: 'sub0'."):
         r.glob(top, "sub1|sub1")

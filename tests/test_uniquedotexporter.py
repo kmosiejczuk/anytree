@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from filecmp import cmp
-from nose.tools import eq_
+import pytest
 from nose.tools import with_setup
 from os import makedirs
 from os.path import dirname
@@ -23,7 +23,7 @@ def test_tree1():
     id_s0b = hex(id(s0b))
 
     lines = tuple(UniqueDotExporter(root))
-    eq_(lines, ('digraph tree {',
+    assert lines == ('digraph tree {',
                 '    "{id_root}" [label="root"];'.format(id_root=id_root),
                 '    "{id_s0}" [label="sub0"];'.format(id_s0=id_s0),
                 '    "{id_s0b}" [label="sub0B"];'.format(id_s0b=id_s0b),
