@@ -1,4 +1,4 @@
-from nose.tools import eq_
+import pytest
 
 from anytree import AnyNode
 from anytree import Node
