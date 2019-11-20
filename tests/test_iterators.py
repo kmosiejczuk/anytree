@@ -92,16 +92,11 @@ def test_levelgrouporder():
     i = Node("i", parent=g)
     h = Node("h", parent=i)
 
-    assert list(LevelGroupOrderIter(f)) ==
-        [(f,), (b, g), (a, d, i), (c, e, h)]
-    assert list(LevelGroupOrderIter(f, maxlevel=0)) ==
-        []
-    assert list(LevelGroupOrderIter(f, maxlevel=3)) ==
-        [(f,), (b, g), (a, d, i)]
-    assert list(LevelGroupOrderIter(f, filter_=lambda n: n.name not in ('e', 'g'))) ==
-        [(f,), (b,), (a, d, i), (c, h)]
-    assert list(LevelGroupOrderIter(f, stop=lambda n: n.name == 'd')) ==
-        [(f,), (b, g), (a, i), (h, )]
+    assert list(LevelGroupOrderIter(f)) == [(f,), (b, g), (a, d, i), (c, e, h)]
+    assert list(LevelGroupOrderIter(f, maxlevel=0)) == []
+    assert list(LevelGroupOrderIter(f, maxlevel=3)) == [(f,), (b, g), (a, d, i)]
+    assert list(LevelGroupOrderIter(f, filter_=lambda n: n.name not in ('e', 'g'))) == [(f,), (b,), (a, d, i), (c, h)]
+    assert list(LevelGroupOrderIter(f, stop=lambda n: n.name == 'd')) == [(f,), (b, g), (a, i), (h, )]
 
     it = LevelGroupOrderIter(f)
     assert next(it) == (f, )
@@ -121,16 +116,11 @@ def test_levelordergroup():
     i = Node("i", parent=g)
     h = Node("h", parent=i)
 
-    assert list(LevelOrderGroupIter(f)) ==
-        [(f,), (b, g), (a, d, i), (c, e, h)]
-    assert list(LevelOrderGroupIter(f, maxlevel=0)) ==
-        []
-    assert list(LevelOrderGroupIter(f, maxlevel=3)) ==
-        [(f,), (b, g), (a, d, i)]
-    assert list(LevelOrderGroupIter(f, filter_=lambda n: n.name not in ('e', 'g'))) ==
-        [(f,), (b,), (a, d, i), (c, h)]
-    assert list(LevelOrderGroupIter(f, stop=lambda n: n.name == 'd')) ==
-        [(f,), (b, g), (a, i), (h, )]
+    assert list(LevelOrderGroupIter(f)) == [(f,), (b, g), (a, d, i), (c, e, h)]
+    assert list(LevelOrderGroupIter(f, maxlevel=0)) == []
+    assert list(LevelOrderGroupIter(f, maxlevel=3)) == [(f,), (b, g), (a, d, i)]
+    assert list(LevelOrderGroupIter(f, filter_=lambda n: n.name not in ('e', 'g'))) == [(f,), (b,), (a, d, i), (c, h)]
+    assert list(LevelOrderGroupIter(f, stop=lambda n: n.name == 'd')) == [(f,), (b, g), (a, i), (h, )]
 
     it = LevelOrderGroupIter(f)
     assert next(it) == (f, )
@@ -150,16 +140,11 @@ def test_zigzaggroup():
     i = Node("i", parent=g)
     h = Node("h", parent=i)
 
-    assert list(ZigZagGroupIter(f)) ==
-        [(f,), (g, b), (a, d, i), (h, e, c)]
-    assert list(ZigZagGroupIter(f, maxlevel=0)) ==
-        []
-    assert list(ZigZagGroupIter(f, maxlevel=3)) ==
-        [(f,), (g, b), (a, d, i)]
-    assert list(ZigZagGroupIter(f, filter_=lambda n: n.name not in ('e', 'g'))) ==
-        [(f,), (b,), (a, d, i), (h, c)]
-    assert list(ZigZagGroupIter(f, stop=lambda n: n.name == 'd')) ==
-        [(f,), (g, b), (a, i), (h, )]
+    assert list(ZigZagGroupIter(f)) == [(f,), (g, b), (a, d, i), (h, e, c)]
+    assert list(ZigZagGroupIter(f, maxlevel=0)) == []
+    assert list(ZigZagGroupIter(f, maxlevel=3)) == [(f,), (g, b), (a, d, i)]
+    assert list(ZigZagGroupIter(f, filter_=lambda n: n.name not in ('e', 'g'))) == [(f,), (b,), (a, d, i), (h, c)]
+    assert list(ZigZagGroupIter(f, stop=lambda n: n.name == 'd')) == [(f,), (g, b), (a, i), (h, )]
 
     it = ZigZagGroupIter(f)
     assert next(it) == (f, )

@@ -29,4 +29,4 @@ def test_tree1():
                 '    "{id_s0b}" [label="sub0B"];'.format(id_s0b=id_s0b),
                 '    "{id_root}" -> "{id_s0}";'.format(id_root=id_root, id_s0=id_s0),
                 '    "{id_s0}" -> "{id_s0b}";'.format(id_s0=id_s0, id_s0b=id_s0b),
-                '}'))
+                '}')

@@ -126,9 +126,6 @@ def test_by_attr():
     anytree.Node("sub0B", parent=s0, lines=["sub", "0B"])
     anytree.Node("sub0A", parent=s0)
     anytree.Node("sub1", parent=root, lines=["sub1"])
-    assert anytree.RenderTree(root).by_attr() ==
-        u"root\n├── sub0\n│   ├── sub0B\n│   └── sub0A\n└── sub1"
-    assert anytree.RenderTree(root).by_attr("lines") ==
-        u"root\n├── su\n│   b0\n│   ├── sub\n│   │   0B\n│   └── \n└── sub1"
-    assert anytree.RenderTree(root).by_attr(lambda node: ":".join(node.name)) ==
-        u"r:o:o:t\n├── s:u:b:0\n│   ├── s:u:b:0:B\n│   └── s:u:b:0:A\n└── s:u:b:1"
+    assert anytree.RenderTree(root).by_attr() == u"root\n├── sub0\n│   ├── sub0B\n│   └── sub0A\n└── sub1"
+    assert anytree.RenderTree(root).by_attr("lines") == u"root\n├── su\n│   b0\n│   ├── sub\n│   │   0B\n│   └── \n└── sub1"
+    assert anytree.RenderTree(root).by_attr(lambda node: ":".join(node.name)) == u"r:o:o:t\n├── s:u:b:0\n│   ├── s:u:b:0:B\n│   └── s:u:b:0:A\n└── s:u:b:1"

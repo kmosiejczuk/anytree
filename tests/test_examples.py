@@ -19,8 +19,7 @@ def test_stackoverflow():
     assert str(udo) == "Node('/Udo')"
     assert str(joe) == "Node('/Udo/Dan/Joe')"
 
-    assert ["%s%s" % (pre, node.name) for pre, fill, node in RenderTree(udo)] ==
-    [
+    assert ["%s%s" % (pre, node.name) for pre, fill, node in RenderTree(udo)] == [
         u"Udo",
         u"├── Marc",
         u"│   └── Lian",
@@ -29,5 +28,4 @@ def test_stackoverflow():
         u"    ├── Jan",
         u"    └── Joe",
     ]
-    assert str(dan.children) ==
-        "(Node('/Udo/Dan/Jet'), Node('/Udo/Dan/Jan'), Node('/Udo/Dan/Joe'))"
+    assert str(dan.children) == "(Node('/Udo/Dan/Jet'), Node('/Udo/Dan/Jan'), Node('/Udo/Dan/Joe'))"

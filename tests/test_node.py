@@ -276,8 +276,7 @@ def test_node_children_init():
         ]),
         Node("b")
     ])
-    assert repr(root.descendants) ==
-        "(Node('/root/a'), Node('/root/a/aa'), Node('/root/b'))"
+    assert repr(root.descendants) == "(Node('/root/a'), Node('/root/a/aa'), Node('/root/b'))"
 
 
 def test_anynode_children_init():
@@ -288,8 +287,7 @@ def test_anynode_children_init():
         ]),
         AnyNode(foo="b")
     ])
-    assert repr(root.descendants) ==
-        "(AnyNode(foo='a'), AnyNode(foo='aa'), AnyNode(foo='b'))"
+    assert repr(root.descendants) == "(AnyNode(foo='a'), AnyNode(foo='aa'), AnyNode(foo='b'))"
 
 
 def test_descendants():
